@@ -1,0 +1,31 @@
+{
+  "name": "vitepress-template",
+  "description": "vitepress-template",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "devDependencies": {
+    "@types/node": "^18.11.12",
+    "vue": "^3.2.37"
+  },
+  "dependencies": {
+    "cross-env": "^7.0.3",
+    "vitepress": "^1.0.0-alpha.8"
+  },
+  "scripts": {
+    "dev": "vitepress dev",
+    "build": "cross-env BASE=/new-vitepress-demo/ vitepress build",
+    "serve": "vitepress serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dev-zuo/new-vitepress-demo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dev-zuo/new-vitepress-demo/issues"
+  },
+  "homepage": "https://github.com/dev-zuo/new-vitepress-demo#readme"
+}
