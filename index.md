@@ -2,8 +2,8 @@
 layout: home
 
 hero:
-  name: VitePress-Demo
-  text: VitePress模板
+  name: Formily
+  text: Low code
   tagline: This is an empty template...
   image:
     src: /dev.svg
@@ -15,7 +15,7 @@ hero:
       link: /guide/
     - theme: alt
       text: View on GitHub
-      link: https://github.com/dev-zuo
+      link: https://github.com/formily
 
 features:
   - icon: ⚡️

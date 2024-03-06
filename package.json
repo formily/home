@@ -14,18 +14,18 @@
   },
   "scripts": {
     "dev": "vitepress dev",
-    "build": "cross-env BASE=/new-vitepress-demo/ vitepress build",
+    "build": "cross-env vitepress build",
     "serve": "vitepress serve"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dev-zuo/new-vitepress-demo.git"
+    "url": "git+https://github.com/formily/new-vitepress-demo.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/dev-zuo/new-vitepress-demo/issues"
+    "url": "https://github.com/formily/new-vitepress-demo/issues"
   },
-  "homepage": "https://github.com/dev-zuo/new-vitepress-demo#readme"
+  "homepage": "https://github.com/formily/new-vitepress-demo#readme"
 }

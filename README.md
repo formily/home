@@ -1,3 +1,7 @@
 # vitepress-demo
 
-vitepress空模板
+vitepress 空模板
+
+## node
+
+node 18+
