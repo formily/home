@@ -6,10 +6,12 @@
   "type": "module",
   "devDependencies": {
     "@types/node": "^18.11.12",
+    "sass": "^1.71.1",
     "vue": "^3.2.37"
   },
   "dependencies": {
     "cross-env": "^7.0.3",
+    "element-plus": "^2.6.1",
     "vitepress": "^1.0.0-alpha.8"
   },
   "scripts": {

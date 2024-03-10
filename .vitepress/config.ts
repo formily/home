@@ -25,6 +25,7 @@ export default defineConfig({
 
     nav: [
       { text: "Guide", link: "/guide/" },
+      { text: "低代码配置列表", link: "/configList/" },
       // { text: "书单", link: "/book/" },
       // { text: "github", link: "https://github.com/formily" },
     ],
