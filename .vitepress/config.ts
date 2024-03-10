@@ -12,15 +12,23 @@ export default defineConfig({
       dark: "vitesse-dark",
     },
   },
+  head: [
+    // <link rel="" type="image/x-icon" href="//img.alicdn.com/imgextra/i3/O1CN01XtT3Tv1Wd1b5hNVKy_!!6000000002810-55-tps-360-360.svg">
+    [
+      'link',
+      { rel: 'shortcut icon', type:"image/x-icon", href: '/formily-icon.svg' }
+    ],
+  ],
   themeConfig: {
-    logo: "/logo-old.png",
+    logo: "/formily-icon.svg",
     siteTitle: "Formily",
 
     nav: [
       { text: "Guide", link: "/guide/" },
-      { text: "书单", link: "/book/" },
+      // { text: "书单", link: "/book/" },
       // { text: "github", link: "https://github.com/formily" },
     ],
+
 
     socialLinks: [
       { icon: "github", link: "https://github.com/formily" },
@@ -50,8 +58,8 @@ export default defineConfig({
     ],
 
     footer: {
-      message: "站在前人的肩膀上，我们不生产知识，只是知识的搬运工。",
-      copyright: "Copyright © 2016-present zuo11.com. 鄂ICP备16014741号-1",
+      message: "",
+      copyright: "Copyright © 2024-present dev-zuo、hjliu95",
     },
   },
 });
