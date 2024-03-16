@@ -1,3 +1,8 @@
+---
+# sidebar: false
+aside: false
+---
+
 <script setup>
 import { ref } from 'vue'
 import ConfigList from './components/ConfigList.vue'

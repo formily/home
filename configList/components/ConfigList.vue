@@ -4,20 +4,33 @@
     <div class="lpm-content">
       <div class="lpm-content-top">
         <el-button type="primary" @click="addConfig">新建</el-button>
+        <div>
+          <el-input
+            v-model="queryText"
+            clearable
+            placeholder="请输入查询关键字"
+            style="width: 200px; margin-right: 20px"
+          ></el-input>
+          <el-button type="primary" @click="queryList">查询</el-button>
+        </div>
       </div>
       <el-table v-loading="loading" :data="tableDataObject.list">
         <el-table-column prop="name" label="名称" />
         <el-table-column prop="bid" label="配置ID" />
         <el-table-column prop="remark" label="备注" />
         <el-table-column prop="createDate" label="创建日期" />
+        <el-table-column prop="updateDate" label="更新时间" />
         <el-table-column prop="operate" label="操作" width="180">
           <template #default="scope">
-            <el-button type="primary" text @click="handleEdit(scope.row)"
+            <el-button type="primary" text @click="handleDetail(scope.row)"
               >详情</el-button
             >
-            <el-button type="primary" text @click="handleDelete(scope.row)"
-              >删除</el-button
+            <el-button type="primary" text @click="preview(scope.row)"
+              >预览</el-button
             >
+            <!-- <el-button type="primary" text @click="handleDelete(scope.row)"
+              >删除</el-button
+            > -->
           </template>
         </el-table-column>
       </el-table>
@@ -70,6 +83,7 @@ import { log } from "console";
 
 const loading = ref(false);
 const dialogFormVisible = ref(false);
+const queryText = ref("");
 const form = reactive({
   name: "",
   remark: "",
@@ -79,6 +93,7 @@ async function findPage() {
   const payload = {
     pageIndex: pageIndex.value,
     pageSize: pageSize.value,
+    queryText: queryText.value,
   };
   try {
     console.log(JSON.stringify(payload, null, 2));
@@ -111,13 +126,20 @@ const {
   currentChange: () => findPage(),
 });
 
+function queryList() {
+  resetPage();
+  findPage();
+}
+
 onMounted(() => {
   findPage();
 });
 
-function handleEdit(row: any) {
-  console.log("edit", row);
+function handleDetail(row: any) {
+  let { bid, name } = row;
+  gotoConfigPage({ bid, name });
 }
+
 async function handleDelete(row: any) {
   try {
     const title = "提示";
@@ -125,10 +147,11 @@ async function handleDelete(row: any) {
     const options: any = { type: "info" };
     await ElMessageBox.confirm(msg, title, options);
     loading.value = true;
+    ElMessage.info("TODO!");
     // const res = await apiGetList({ id: row.id })
-    await new Promise((r) => setTimeout(r, 500));
-    findPage();
-    ElMessage.success("删除成功!");
+    // await new Promise((r) => setTimeout(r, 500));
+    // findPage();
+    // ElMessage.success("删除成功!");
   } catch (e) {
     console.log(e);
   } finally {
@@ -184,6 +207,10 @@ function gotoConfigPage({ bid, name }) {
     "_blank"
   );
 }
+
+function preview() {
+  ElMessage.info("预览");
+}
 </script>
 
 <style lang="scss" scoped>
@@ -206,6 +233,8 @@ function gotoConfigPage({ bid, name }) {
   background: #fff;
   // box-shadow: 0 1px 4px -1px rgba(0, 0, 0, 0.05);
   .lpm-content-top {
+    display: flex;
+    justify-content: space-between;
     margin-bottom: 20px;
   }
 }
