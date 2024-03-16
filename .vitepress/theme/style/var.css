@@ -1,10 +1,18 @@
 :root {
   /* 标题 */
   --vp-home-hero-name-color: transparent;
-  --vp-home-hero-name-background: linear-gradient( 135deg, #1358d9 10%, #4154ff 100%);
-  
+  --vp-home-hero-name-background: linear-gradient(
+    135deg,
+    #1358d9 10%,
+    #4154ff 100%
+  );
+
   /* 图标背景 */
-  --vp-home-hero-image-background-image: linear-gradient( 135deg, #1358d9 10%, #4154ff 100%);
+  --vp-home-hero-image-background-image: linear-gradient(
+    135deg,
+    #1358d9 10%,
+    #4154ff 100%
+  );
   --vp-home-hero-image-filter: blur(250px);
 
   /* brand按钮 */
@@ -24,9 +32,13 @@
   --vp-c-brand-dark: #4154ff;
 
   /* 代码块背景色 */
-  --vp-code-block-bg: rgba(125,125,125,.04);
+  --vp-code-block-bg: rgba(125, 125, 125, 0.04);
 }
 
 .VPImage.logo {
   border-radius: 50%;
+}
+
+.main {
+  width: 900px;
 }

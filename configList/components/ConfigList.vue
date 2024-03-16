@@ -8,15 +8,12 @@
       <el-table v-loading="loading" :data="tableDataObject.list">
         <el-table-column prop="name" label="名称" />
         <el-table-column prop="bid" label="配置ID" />
-        <el-table-column prop="config" label="配置" />
+        <el-table-column prop="remark" label="备注" />
         <el-table-column prop="createDate" label="创建日期" />
-        <!-- <el-table-column prop="id" label="ID">
-          <template #default="scope">{{ scope.row.type }}</template>
-        </el-table-column> -->
         <el-table-column prop="operate" label="操作" width="180">
           <template #default="scope">
             <el-button type="primary" text @click="handleEdit(scope.row)"
-              >编辑</el-button
+              >详情</el-button
             >
             <el-button type="primary" text @click="handleDelete(scope.row)"
               >删除</el-button
@@ -40,8 +37,11 @@
   </div>
   <el-dialog v-model="dialogFormVisible" title="创建低代码配置" width="500">
     <el-form :model="form">
-      <el-form-item label="配置名称" :label-width="formLabelWidth">
+      <el-form-item label="配置名称">
         <el-input v-model="form.name" autocomplete="off" />
+      </el-form-item>
+      <el-form-item label="备注">
+        <el-input v-model="form.remark" autocomplete="off" />
       </el-form-item>
       <!-- <el-form-item label="Zones" :label-width="formLabelWidth">
         <el-select v-model="form.region" placeholder="Please select a zone">
@@ -53,7 +53,9 @@
     <template #footer>
       <div class="dialog-footer">
         <el-button @click="dialogFormVisible = false">取消</el-button>
-        <el-button type="primary" @click="saveConfig"> 确定 </el-button>
+        <el-button type="primary" @click="saveConfig" :loading="confirmLoading">
+          确定
+        </el-button>
       </div>
     </template>
   </el-dialog>
@@ -70,6 +72,7 @@ const loading = ref(false);
 const dialogFormVisible = ref(false);
 const form = reactive({
   name: "",
+  remark: "",
 });
 async function findPage() {
   loading.value = true;
@@ -79,7 +82,7 @@ async function findPage() {
   };
   try {
     console.log(JSON.stringify(payload, null, 2));
-    await new Promise((r) => setTimeout(r, 500));
+    // await new Promise((r) => setTimeout(r, 500));
     const res: any = await apiServer.get("/configList/list", {
       params: payload,
     });
@@ -136,28 +139,48 @@ async function handleDelete(row: any) {
 function addConfig() {
   dialogFormVisible.value = true;
 }
-
-function saveConfig() {
-  gotoConfigPage();
+function resetAddForm() {
+  dialogFormVisible.value = false;
+  Object.assign(form, {
+    name: "",
+    remark: "",
+  });
 }
 
-function gotoConfigPage() {
-  function generateId() {
-    let chars =
-      "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    let id = "";
-    for (let i = 0; i < 16; i++) {
-      id += chars.charAt(Math.floor(Math.random() * chars.length));
-    }
-    return id;
+const confirmLoading = ref(false);
+async function saveConfig() {
+  try {
+    confirmLoading.value = true;
+    const data: any = await apiServer.post("/configList/add", {
+      name: form.name,
+      remark: form.remark,
+    });
+    // success
+    ElMessage.success("添加成功!");
+    findPage();
+    resetAddForm();
+    // "data": {
+    //     "name": "3343",
+    //     "remark": "3433434sdfdsf ",
+    //     "bid": "4dl91VMMBL8vWuOh",
+    //     "createDate": "2024/03/15 00:11:02",
+    //     "_id": "65f321961effb4ffb79e29b6"
+    // },
+    gotoConfigPage(data);
+  } catch (e) {
+    console.log(e);
+  } finally {
+    confirmLoading.value = false;
   }
-  // 生成一个 16 位的随机 ID
-  let randomId = generateId();
-  const name = encodeURIComponent(form.name);
-  console.log(randomId);
+  // console.log("res", res);
+  // gotoConfigPage();
+}
+
+function gotoConfigPage({ bid, name }) {
+  const newName = encodeURIComponent(name);
   //   window.open(`http://127.0.0.1:3000?bid=${randomId}`, "_blank");
   window.open(
-    `${import.meta.env.VITE_DESIGN_URL}?bid=${randomId}&name=${name}`,
+    `${import.meta.env.VITE_DESIGN_URL}?bid=${bid}&name=${newName}`,
     "_blank"
   );
 }
