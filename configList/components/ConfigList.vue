@@ -174,6 +174,10 @@ const confirmLoading = ref(false);
 async function saveConfig() {
   try {
     confirmLoading.value = true;
+    if (!form.name.trim()) {
+      ElMessage.warning('请输入配置名称')
+      return
+    }
     const data: any = await apiServer.post("/configList/add", {
       name: form.name,
       remark: form.remark,
