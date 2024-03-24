@@ -212,8 +212,12 @@ function gotoConfigPage({ bid, name }) {
   );
 }
 
-function preview() {
-  ElMessage.info("预览");
+function preview({ bid, name }) {
+  // ElMessage.info("预览");
+  window.open(
+    `${import.meta.env.VITE_VUE3_PREVIEW}/view?bid=${bid}&name=${name}`,
+    "_blank"
+  );
 }
 </script>
 
